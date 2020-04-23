@@ -28,7 +28,6 @@ public class MainGUI {
 	String location_name;
 	int[] location_distance;
 	int sequence;
-	//boolean isCheck = false; //장소추가,장소삭제,길찾기시작 버튼을 비활성화시키기위한 값 
 
 	//============ 메인화면 레이블 텍스트 갱신 =====================
 	void renew_label() {
@@ -44,7 +43,7 @@ public class MainGUI {
 	//=============새로 만들기 버튼 클릭 이벤트(새 목록 만들기 버튼 클릭 시 실행)==================
 	void create_new() {
 		Font f = new Font("",Font.PLAIN, 30);
-		Frame frame = new Frame("새 목록 만들기");
+		Frame frame = new Frame();
 
 		frame.setBounds(500, 500, 300, 350);
 		frame.setBackground(Color.gray);
@@ -59,7 +58,6 @@ public class MainGUI {
 		Button make = new Button("생성");
 		make.setBounds(20, 300, 80, 40);
 		make.setEnabled(false);
-		
 
 		Button esc = new Button("취소");
 		esc.setBounds(150, 300, 80, 40);
@@ -87,23 +85,17 @@ public class MainGUI {
 			}
 		});
 
-		//make(생성) 버튼 클릭
+		//make 버튼 클릭
 		make.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-		
+
 				machineD = new DataEvent();
-				
 				String s = text.getText();
 				machineD.add_database(s);
 				renew_label();
-				
-				machineD.setIscheck(1);
-				System.out.println(machineD.getIscheck()); //??????????????
-				
 				frame.setVisible(false);
-				
 			}
 		});
 		//x버튼 종료
@@ -128,7 +120,7 @@ public class MainGUI {
 	//================== 목록에 장소 추가 (장소추가 버튼 클릭 시 실행)=========================
 	void add_location() {
 		Font f = new Font("",Font.PLAIN, 30);
-		Frame frame = new Frame("장소추가");
+		Frame frame = new Frame();
 
 		frame.setBounds(500, 500, 300, 350);
 		frame.setBackground(Color.gray);
@@ -157,7 +149,6 @@ public class MainGUI {
 
 		sequence = 0;
 		location_distance = new int[machineD.getName_list().size()];
-		
 		//완료 버튼 클릭
 		make.addActionListener(new ActionListener() {
 			@Override
@@ -189,7 +180,6 @@ public class MainGUI {
 			}
 		});
 
-		
 		//TextField 에 값이 들어간 경우에만 입력버튼 활성화
 		text.addTextListener(new TextListener() {
 
@@ -205,7 +195,6 @@ public class MainGUI {
 			}
 		});
 
-		
 		//x버튼 종료
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -214,7 +203,6 @@ public class MainGUI {
 			}
 		});
 
-		
 		//esc버튼 종료
 		esc.addActionListener(new ActionListener() {
 
@@ -225,13 +213,11 @@ public class MainGUI {
 			}
 		});
 	}
- //=================================================================================
-	
-	
+
 	//================ 목록에서 장소 삭제(장소삭제 버튼 클릭 시 실행) =============================
 	void delete_location() {
 		Font f = new Font("",Font.PLAIN, 30);
-		Frame frame = new Frame("장소삭제");
+		Frame frame = new Frame();
 
 		frame.setBounds(500, 500, 300, 350);
 		frame.setBackground(Color.gray);
@@ -302,13 +288,10 @@ public class MainGUI {
 			}
 		});
 	}
-//============================================================================
+
 
 	public static void main(String[] args) {	
 
-		boolean bool = false; // 장소추가,장소삭제,길찾기시작 버튼 비활성화 값
-		
-		
 		MainGUI m = new MainGUI();
 		Frame f = new Frame("초기 화면");
 		Font font = new Font("", Font.PLAIN, 18);
@@ -316,13 +299,7 @@ public class MainGUI {
 		f.setLayout(null);
 		f.setBounds(20, 20, 1000, 600);
 		f.setBackground(Color.lightGray);
-		
-		if(m.machineD.getIscheck() == 0) {
-			bool = false;
-		}else {
-			bool = true;
-		}
-		
+
 		//레이블
 		m.main_label = new Label(m.main_label_text);
 		m.main_label.setBounds(100, 100, 800, 400);
@@ -341,30 +318,27 @@ public class MainGUI {
 
 		Button create = new Button("새 목록 만들기");
 		create.setBounds(buttonXbase, 25, 130, 50);
-		
+
 		Button load = new Button("불러오기");
 		load.setBounds(buttonXbase+gan, 25, 100, 50);
 
 		Button addInfo = new Button("장소추가");
 		addInfo.setBounds(buttonXbase+gan*2, 25, 100, 50);
-		
-		addInfo.setEnabled(bool); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 		Button deleteInfo = new Button("장소삭제");
 		deleteInfo.setBounds(buttonXbase+gan*3, 25, 100, 50);
-		deleteInfo.setEnabled(bool);
 
 		Button start = new Button("길찾기 시작");
 		start.setBounds(buttonXbase+gan*4, 25, 130, 50);
-		start.setEnabled(bool);
+
 
 		//새로 만들기 버튼 클릭
 		create.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("새로 만들기");
-				System.out.println(m.machineD.getIscheck());
 				m.create_new();
+
 			}
 		});
 
