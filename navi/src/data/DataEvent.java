@@ -11,7 +11,15 @@ public class DataEvent implements DataEventInterface{
 	private Database db;
 	private ArrayList<ArrayList<Integer>> d_list = new ArrayList<>();;
 	private ArrayList<String> name_list = new ArrayList<>();;
+	private int ischeck = 0;
 
+	public int getIscheck() {
+		return ischeck;
+	}
+	public void setIscheck(int ischeck) {
+		this.ischeck = ischeck;
+	}
+	
 	public Database getDb() {
 		return db;
 	}
